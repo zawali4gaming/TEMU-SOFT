@@ -74,6 +74,91 @@ nav{display:flex;gap:20px;align-items:center;color:var(--muted);font-size:.93rem
 .controls-group{display:flex;align-items:center;gap:8px}
 .select-custom{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:20px;padding:6px 10px;font-size:0.85rem;outline:none;cursor:pointer}
 
+/* ================= 3D REALISTIC CSS CAT ================= */
+#screenCat3D {
+  position: fixed;
+  width: 55px;
+  height: 45px;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease-out;
+}
+
+.cat-body {
+  position: absolute;
+  width: 42px;
+  height: 26px;
+  background: linear-gradient(135deg, #f39c12, #d35400);
+  border-radius: 20px 20px 15px 15px;
+  top: 12px;
+  left: 6px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.cat-head {
+  position: absolute;
+  width: 28px;
+  height: 24px;
+  background: linear-gradient(135deg, #f39c12, #d35400);
+  border-radius: 50%;
+  top: 4px;
+  left: 24px;
+}
+
+.cat-ear {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 12px solid #d35400;
+  top: -7px;
+}
+.cat-ear.left { left: 2px; transform: rotate(-15deg); }
+.cat-ear.right { right: 2px; transform: rotate(15deg); }
+
+.cat-eye {
+  position: absolute;
+  width: 4px;
+  height: 5px;
+  background: #2c3e50;
+  border-radius: 50%;
+  top: 8px;
+}
+.cat-eye.left { left: 7px; }
+.cat-eye.right { right: 7px; }
+
+.cat-tail {
+  position: absolute;
+  width: 18px;
+  height: 5px;
+  background: #d35400;
+  border-radius: 10px;
+  top: 18px;
+  left: -12px;
+  transform-origin: right center;
+  animation: tailWag 0.3s infinite alternate ease-in-out;
+}
+
+.cat-leg {
+  position: absolute;
+  width: 5px;
+  height: 12px;
+  background: #d35400;
+  border-radius: 3px;
+  bottom: -4px;
+}
+.cat-leg.l1 { left: 9px; }
+.cat-leg.l2 { left: 17px; }
+.cat-leg.l3 { right: 9px; }
+.cat-leg.l4 { right: 15px; }
+
+@keyframes tailWag {
+  0% { transform: rotate(-25deg); }
+  100% { transform: rotate(25deg); }
+}
+
 /* Hero Section */
 .hero{padding:32px 0 45px;position:relative}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:45px}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--cyan);background:rgba(66,230,208,0.1);border:1px solid rgba(66,230,208,0.2);border-radius:99px;padding:6px 12px;font-size:.82rem;font-weight:750;letter-spacing:.04em}.pulse{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 5px rgba(66,230,208,0.2)}
 h1{font-size:clamp(2.3rem,4.5vw,4.5rem);line-height:1.08;letter-spacing:-.05em;margin:16px 0 16px;max-width:720px}h1 .gradient{background:var(--gradient-title);-webkit-background-clip:text;background-clip:text;color:transparent}.lead{color:var(--muted);font-size:1.08rem;max-width:570px;margin-bottom:0}.hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin:24px 0 22px}.trust-line{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.88rem}.avatars{display:flex}.avatars span{width:28px;height:28px;margin-right:-7px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--cyan));border:2px solid var(--bg);color:#fff;font-size:.7rem}
@@ -160,16 +245,34 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 </style>
 </head>
 <body>
+
+<!-- تصميم القط الثلاثي الأبعاد الواقعي (3D Realistic Cat) -->
+<div id="screenCat3D">
+  <div class="cat-body">
+    <div class="cat-tail"></div>
+    <div class="cat-leg l1"></div>
+    <div class="cat-leg l2"></div>
+    <div class="cat-leg l3"></div>
+    <div class="cat-leg l4"></div>
+  </div>
+  <div class="cat-head">
+    <div class="cat-ear left"></div>
+    <div class="cat-ear right"></div>
+    <div class="cat-eye left"></div>
+    <div class="cat-eye right"></div>
+  </div>
+</div>
+
 <header>
   <div class="container nav">
     <a class="brand" href="#accueil" aria-label="Temusoft accueil"><span class="brand-mark">T</span><span>temu<em>soft</em></span></a>
     
-    <!-- Controls (Lang & Theme) - مرتبة عربي، فرنسي، إنجليزي -->
+    <!-- Controls (Theme & Lang) - مرتبة: عربي، فرنسي، إنجليزي -->
     <div class="controls-group">
       <select id="langSelect" class="select-custom" aria-label="Language Selector">
-        <option value="ar">🇩🇿 AR (عربي)</option>
-        <option value="fr">🇫🇷 FR (Français)</option>
-        <option value="en">🇬🇧 EN (English)</option>
+        <option value="ar">🇩🇿 عربي (AR)</option>
+        <option value="fr">🇫🇷 Français (FR)</option>
+        <option value="en">🇬🇧 English (EN)</option>
       </select>
       
       <select id="themeSelect" class="select-custom" aria-label="Theme Selector">
@@ -415,7 +518,7 @@ footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-s
     <span>© <span id="year"></span> Temusoft. <span data-i18n="rights">Tous droits réservés.</span></span>
     <div class="footer-links">
       <a href="#services" data-i18n="nav_services">Services</a>
-      <a href="#solutions" data-i18n="nav_solutions">Solutions</a>
+      <a href="#solutions" data-i18n="nav_solutions">Nos solutions</a>
       <a href="#contact" data-i18n="nav_contact">Contact</a>
     </div>
   </div>
@@ -501,7 +604,7 @@ const translations = {
     p1_arbah_title: "ARBAH Application (PC & Mobile)", p1_arbah_desc: "Complete management for phone & computer repair shops: sales, parts, repairs, inventory and profits.", p_demo: "Browse ARBAH app directly ↗",
     p2_desc: "A tool to organize orders, items, sales, and daily operations for your restaurant.", p2_link: "Talk about your restaurant ↗",
     p3_desc: "Keep a clear view of stock quantities, movements, and alerts to control inventory.", p3_link: "Organize my stock ↗",
-    p4_desc: "Automate operations between Word, Excel, and PowerPoint: documents and reports.", p4_link: "Automate documents ↗",
+    p4_desc: "Automate operations between Word, Excel, and PowerPoint: documents and reports.", p4_link: "Automatiser mes documents ↗",
     met_kicker: "A Clear Method", met_title: "From your need to your solution.", met_desc: "A simple, transparent, and collaborative process to move your project forward.",
     st1_num: "STEP 01", st1_title: "We Listen", st1_desc: "We understand your business, challenges, and priorities.",
     st2_num: "STEP 02", st2_title: "We Design", st2_desc: "We define the most suitable features and user experience.",
@@ -572,6 +675,50 @@ if (visualContainer && dashboard) {
     dashboard.style.transform = `rotateX(0deg) rotateY(0deg)`;
   });
 }
+
+/* ================= 3D REALISTIC CAT ESCAPING LOGIC ================= */
+const cat = document.getElementById('screenCat3D');
+let catX = window.innerWidth / 2;
+let catY = window.innerHeight / 2;
+let mouseX = catX;
+let mouseY = catY;
+
+window.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animateCat3D() {
+  const dx = mouseX - catX;
+  const dy = mouseY - catY;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  // إذا اقترب سهم الماوس بمسافة تقل عن 180 بكسل، يهرب القط في الاتجاه المعاكس وبسرعة
+  if (distance < 180) {
+    const angle = Math.atan2(dy, dx);
+    catX -= Math.cos(angle) * 6;
+    catY -= Math.sin(angle) * 6;
+  } else {
+    // حركة هادئة وتجوال طبيعي عندما يكون الماوس بعيداً
+    catX += (Math.random() - 0.5) * 2.5;
+    catY += (Math.random() - 0.5) * 2.5;
+  }
+
+  // الحفاظ على القط داخل حدود الشاشة
+  catX = Math.max(40, Math.min(window.innerWidth - 60, catX));
+  catY = Math.max(40, Math.min(window.innerHeight - 60, catY));
+
+  // تحديد زاوية الدوران وتوجيه القط حسب حركة الهروب
+  const moveAngle = Math.atan2(dy, dx) * (180 / Math.PI);
+  const flip = (mouseX < catX) ? "scaleX(-1)" : "scaleX(1)";
+
+  cat.style.left = `${catX}px`;
+  cat.style.top = `${catY}px`;
+  cat.style.transform = `translate(-50%, -50%) ${flip}`;
+
+  requestAnimationFrame(animateCat3D);
+}
+requestAnimationFrame(animateCat3D);
 
 /* ================= INTERACTIVE POS APP LOGIC ================= */
 let cartItems = [
@@ -668,8 +815,12 @@ langSelect.addEventListener('change', (e) => {
   updateLanguage(e.target.value);
 });
 
-// جعل اللغة العربية افتراضية وتلقائية في كل الحالات (ما لم يقم المستخدم بتغييرها يدوياً وحفظها)
-let initialLang = localStorage.getItem('temu_lang') || 'ar';
+// فرض اللغة العربية حصرياً كلغة افتراضية وتلقائية في كل الحالات
+let initialLang = localStorage.getItem('temu_lang');
+if (!initialLang || (initialLang !== 'ar' && initialLang !== 'fr' && initialLang !== 'en')) {
+  initialLang = 'ar';
+  localStorage.setItem('temu_lang', 'ar');
+}
 
 langSelect.value = initialLang;
 updateLanguage(initialLang);
